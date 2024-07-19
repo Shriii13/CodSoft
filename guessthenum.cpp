@@ -1,3 +1,11 @@
+/************ GUESS THE NUMBER GAME ***************
+
+AUTHOR : Shriya Shinde
+DATE : 14/07/2024  
+PROGRAMMING LANGUAGE : C++
+
+*/
+  
 
 #include <iostream>
 #include <cstdlib>
@@ -23,11 +31,10 @@ int guess = 0;
   // Counter to track the number of attempts
  
  int attempts = 0;
-  
   do
- {
-    
-//  store it into guess
+    {
+
+      //  store it into guess
    
  cout << "\nEnter Guess (1-50) : ";
     cin >> guess;
