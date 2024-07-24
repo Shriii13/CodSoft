@@ -1,4 +1,15 @@
- #include <iostream>
+/************ LIBRARY MANAGEMENT ***************
+
+AUTHOR : Shriya Shinde
+DATE : 24/07/2024  
+PROGRAMMING LANGUAGE : C++
+
+*/
+
+
+
+
+#include <iostream>
 #include <vector>
 #include <string>
 #include <unordered_map>
