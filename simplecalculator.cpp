@@ -1,3 +1,14 @@
+/************ SIMPLE CALCULATOR ***************
+
+AUTHOR : Shriya Shinde
+DATE : 27/07/2024  
+PROGRAMMING LANGUAGE : C++
+
+*/
+
+
+
+
 #include <iostream>
 using namespace std;
  
