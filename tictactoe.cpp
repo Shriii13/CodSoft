@@ -1,3 +1,13 @@
+/************ Tic Tac Toe Game ***********
+
+AUTHOR : Shriya Shinde
+DATE : 25/07/2024  
+PROGRAMMING LANGUAGE : C++
+
+*/
+
+
+
 #include<iostream>
 #include <ctime>
 
