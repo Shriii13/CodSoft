@@ -9,11 +9,15 @@ PROGRAMMING LANGUAGE : C++
 
 
 
+
 #include <iostream>
 #include <vector>
 #include <string>
 #include <unordered_map>
 #include <ctime>
+
+// Structure representing a Book in the library
+
 
 struct Book {
     std::string title;
@@ -21,18 +25,29 @@ struct Book {
     std::string isbn;
     bool available;
 
+   
+ // Constructor for Book
     Book(std::string t, std::string a, std::string i)
         : title(t), author(a), isbn(i), available(true) {}
 };
 
+
+
+// Structure representing a Borrower of books from the library
 struct Borrower {
     std::string name;
     std::string contactInfo;
 
+   
+
+ // Constructor for Borrower
     Borrower(std::string n, std::string c)
         : name(n), contactInfo(c) {}
 };
 
+
+
+// Structure representing a Transaction in the library
 struct Transaction {
     std::string isbn;
     std::string borrowerName;
@@ -40,6 +55,8 @@ struct Transaction {
     std::time_t returnDate;
     bool returned;
 
+ 
+   // Constructor for Transaction
     Transaction(std::string i, std::string b)
         : isbn(i), borrowerName(b), returned(false) {
         checkoutDate = std::time(nullptr);
@@ -47,13 +64,23 @@ struct Transaction {
     }
 };
 
+
+
+// Global variables to store books, borrowers, and transactions
 std::vector<Book> books;
 std::unordered_map<std::string, Borrower> borrowers;
 std::vector<Transaction> transactions;
+
+
+
+// Function to add a new book to the library
 void addBook(const std::string& title, const std::string& author, const std::string& isbn) {
     books.emplace_back(title, author, isbn);
 }
 
+
+
+// Function to search for a book in the library by title, author, or ISBN
 void searchBook(const std::string& query) {
     for (const auto& book : books) {
         if (book.title == query || book.author == query || book.isbn == query) {
@@ -62,7 +89,11 @@ void searchBook(const std::string& query) {
         }
     }
 }
- void checkoutBook(const std::string& isbn, const std::string& borrowerName) {
+
+
+
+// Function to checkout a book from the library
+void checkoutBook(const std::string& isbn, const std::string& borrowerName) {
     for (auto& book : books) {
         if (book.isbn == isbn && book.available) {
             book.available = false;
@@ -74,6 +105,9 @@ void searchBook(const std::string& query) {
     std::cout << "Book not available or not found.\n";
 }
 
+
+
+// Function to return a book to the library
 void returnBook(const std::string& isbn) {
     for (auto& book : books) {
         if (book.isbn == isbn && !book.available) {
@@ -90,7 +124,11 @@ void returnBook(const std::string& isbn) {
     }
     std::cout << "Book not found or already returned.\n";
 }
- double calculateFine(const std::string& isbn) {
+
+
+
+// Function to calculate the fine for an overdue book
+double calculateFine(const std::string& isbn) {
     for (const auto& transaction : transactions) {
         if (transaction.isbn == isbn && transaction.returned) {
             std::time_t now = std::time(nullptr);
@@ -102,6 +140,10 @@ void returnBook(const std::string& isbn) {
     }
     return 0.0;
 }
+
+
+
+// Function to display the main menu
 void showMenu() {
     std::cout << "\n\n\nLibrary Management System\n";
     std::cout << "1. Add Book\n";
@@ -116,6 +158,9 @@ int main() {
     int choice;
     std::string title, author, isbn, borrowerName;
 
+   
+
+ // Main loop to display the menu and process user choices
     while (true) {
         showMenu();
         std::cin >> choice;
