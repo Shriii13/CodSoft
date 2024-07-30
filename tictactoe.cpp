@@ -6,10 +6,10 @@ PROGRAMMING LANGUAGE : C++
 
 */
 
-
-
 #include<iostream>
 #include <ctime>
+
+// Function prototypes
 
 void drawBoard(char *spaces);
 void playerMove(char *spaces, char player);
@@ -19,16 +19,23 @@ bool checkTie(char *spaces);
 
 int main()
 {
-    char spaces[9] = {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
+    // Initialize the board with empty spaces
+    
+char spaces[9] = {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
     char player = 'X';
     char computer = 'O';
     bool running = true;
 
-    drawBoard(spaces);
+    // Draw the initial empty board
+    
+drawBoard(spaces);
 
     while(running){
+        // Player makes a move
         playerMove(spaces, player);
         drawBoard(spaces);
+        
+        // Check if there's a winner or a tie
         if(checkWinner(spaces, player, computer)){
             running = false;
             break;
@@ -38,8 +45,11 @@ int main()
             break;
         }
 
+        // Computer makes a move
         computerMove(spaces, computer);
         drawBoard(spaces);
+        
+        // Check if there's a winner or a tie
         if(checkWinner(spaces, player, computer)){
             running = false;
             break;
@@ -53,6 +63,8 @@ int main()
 
     return 0;
 }
+
+// Function to draw the current state of the board
 void drawBoard(char *spaces){
     std::cout << '\n';
     std::cout << "     |     |     " << '\n';
@@ -66,6 +78,8 @@ void drawBoard(char *spaces){
     std::cout << "     |     |     " << '\n';
     std::cout << '\n';
 }
+
+// Function to handle player's move
 void playerMove(char *spaces, char player){
     int number;
     do{
@@ -78,6 +92,8 @@ void playerMove(char *spaces, char player){
         }
     }while(!number > 0 || !number < 8);
 }
+
+// Function to handle computer's move
 void computerMove(char *spaces, char computer){
     int number;
     srand(time(0));
@@ -90,6 +106,8 @@ void computerMove(char *spaces, char computer){
         }
     }
 }
+
+// Function to check if there is a winner
 bool checkWinner(char *spaces, char player, char computer){
 
     if((spaces[0] != ' ') && (spaces[0] == spaces[1]) && (spaces[1] == spaces[2])){
@@ -122,6 +140,8 @@ bool checkWinner(char *spaces, char player, char computer){
 
     return true;
 }
+
+// Function to check if there is a tie
 bool checkTie(char *spaces){
 
     for(int i = 0; i < 9; i++){
