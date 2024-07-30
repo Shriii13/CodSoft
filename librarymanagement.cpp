@@ -7,8 +7,7 @@ PROGRAMMING LANGUAGE : C++
 */
 
 
-
-
+
 
 #include <iostream>
 #include <vector>
@@ -27,13 +26,15 @@ struct Book {
 
    
  // Constructor for Book
-    Book(std::string t, std::string a, std::string i)
+    
+Book(std::string t, std::string a, std::string i)
         : title(t), author(a), isbn(i), available(true) {}
 };
 
 
 
 // Structure representing a Borrower of books from the library
+
 struct Borrower {
     std::string name;
     std::string contactInfo;
@@ -41,13 +42,15 @@ struct Borrower {
    
 
  // Constructor for Borrower
-    Borrower(std::string n, std::string c)
+  
+ Borrower(std::string n, std::string c)
         : name(n), contactInfo(c) {}
 };
 
 
 
 // Structure representing a Transaction in the library
+
 struct Transaction {
     std::string isbn;
     std::string borrowerName;
@@ -57,7 +60,8 @@ struct Transaction {
 
  
    // Constructor for Transaction
-    Transaction(std::string i, std::string b)
+   
+ Transaction(std::string i, std::string b)
         : isbn(i), borrowerName(b), returned(false) {
         checkoutDate = std::time(nullptr);
         returnDate = 0;
@@ -67,6 +71,7 @@ struct Transaction {
 
 
 // Global variables to store books, borrowers, and transactions
+
 std::vector<Book> books;
 std::unordered_map<std::string, Borrower> borrowers;
 std::vector<Transaction> transactions;
@@ -74,6 +79,7 @@ std::vector<Transaction> transactions;
 
 
 // Function to add a new book to the library
+
 void addBook(const std::string& title, const std::string& author, const std::string& isbn) {
     books.emplace_back(title, author, isbn);
 }
@@ -81,6 +87,7 @@ void addBook(const std::string& title, const std::string& author, const std::str
 
 
 // Function to search for a book in the library by title, author, or ISBN
+
 void searchBook(const std::string& query) {
     for (const auto& book : books) {
         if (book.title == query || book.author == query || book.isbn == query) {
@@ -93,6 +100,7 @@ void searchBook(const std::string& query) {
 
 
 // Function to checkout a book from the library
+
 void checkoutBook(const std::string& isbn, const std::string& borrowerName) {
     for (auto& book : books) {
         if (book.isbn == isbn && book.available) {
@@ -108,6 +116,7 @@ void checkoutBook(const std::string& isbn, const std::string& borrowerName) {
 
 
 // Function to return a book to the library
+
 void returnBook(const std::string& isbn) {
     for (auto& book : books) {
         if (book.isbn == isbn && !book.available) {
@@ -128,13 +137,16 @@ void returnBook(const std::string& isbn) {
 
 
 // Function to calculate the fine for an overdue book
+
 double calculateFine(const std::string& isbn) {
     for (const auto& transaction : transactions) {
         if (transaction.isbn == isbn && transaction.returned) {
             std::time_t now = std::time(nullptr);
             double daysOverdue = difftime(now, transaction.checkoutDate) / (60 * 60 * 24) - 14; // Assuming a 2-week loan period
             if (daysOverdue > 0) {
-                return daysOverdue * 0.50; // Assuming a fine of $0.50 per day
+                return daysOverdue * 0.50;
+
+ // Assuming a fine of $0.50 per day
             }
         }
     }
@@ -144,6 +156,7 @@ double calculateFine(const std::string& isbn) {
 
 
 // Function to display the main menu
+
 void showMenu() {
     std::cout << "\n\n\nLibrary Management System\n";
     std::cout << "1. Add Book\n";
@@ -161,13 +174,15 @@ int main() {
    
 
  // Main loop to display the menu and process user choices
-    while (true) {
+   
+ while (true) {
         showMenu();
         std::cin >> choice;
         std::cin.ignore(); // To ignore the newline character after choice input
 
         switch (choice) {
-        case 1:
+        
+case 1:
             std::cout << "Enter title: ";
             std::getline(std::cin, title);
             std::cout << "Enter author: ";
@@ -176,29 +191,34 @@ int main() {
             std::getline(std::cin, isbn);
             addBook(title, author, isbn);
             break;
-        case 2:
+       
+ case 2:
             std::cout << "Enter title/author/ISBN to search: ";
             std::getline(std::cin, title);
             searchBook(title);
             break;
-        case 3:
+       
+ case 3:
             std::cout << "Enter ISBN: ";
             std::getline(std::cin, isbn);
             std::cout << "Enter borrower name: ";
             std::getline(std::cin, borrowerName);
             checkoutBook(isbn, borrowerName);
             break;
-        case 4:
+        
+case 4:
             std::cout << "Enter ISBN: ";
             std::getline(std::cin, isbn);
             returnBook(isbn);
             break;
-        case 5:
+        
+case 5:
             std::cout << "Enter ISBN: ";
             std::getline(std::cin, isbn);
             std::cout << "Fine: $" << calculateFine(isbn) << '\n';
             break;
-        case 6:
+        
+case 6:
             return 0;
         default:
             std::cout << "Invalid choice. Please try again.\n";
